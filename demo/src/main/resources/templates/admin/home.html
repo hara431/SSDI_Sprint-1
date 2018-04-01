@@ -33,15 +33,20 @@
                 <th>Price</th>
                 <th>Seller</th>
                 <th>Action</th>
-                 
-                <c:forEach var="productout" items="${listProducts}" varStatus="status">
+                <c:forEach items="${listProducts}" var="productout" varStatus="status">
                 <tr>
-                    <td>${productout.productId}</td>
+                <span th:utext="${listProducts}"></span>
+                <c:out value = "${productout.productId}"/>
+                <c:out value = "${productout.productName}"/>
+                <c:out value = "${productout.code}"/>
+                <c:out value = "${productout.price}"/>
+                
+                
+<!--                     <td>${productout.productId}</td>
                     <td>${productout.productName}</td>
                     <td>${productout.code}</td>
                     <td>${productout.price}</td>
-                    <td>${productout.seller}</td>
-                    <td>
+                    <td>${productout.seller}</td> 
                          <form th:action="@{/admin/editproduct}" method="get">
 							<button class="btn btn-md" name="edit PRODUCT"
 							type="Submit">edit Product</button>
@@ -49,7 +54,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="/admin/deleteproduct?id=${productout.id}">Delete</a>
                     </td>
-                             
+                           -->  
                 </tr>
                 </c:forEach>             
             </table>

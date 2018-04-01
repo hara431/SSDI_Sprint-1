@@ -1,7 +1,12 @@
 package com.example.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.model.Product;
 import com.example.model.User;
 import com.example.service.ProductService;
+import com.example.service.ProductServiceImpl;
 import com.example.service.UserService;
 
 //import antlr.collections.List;
@@ -26,6 +32,8 @@ public class LoginController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);;
 
 	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
@@ -70,6 +78,17 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
+//		List<Product> product=productService.listProducts();
+		modelAndView.addObject("product", new Product());
+		modelAndView.addObject("listProducts", this.productService.listProducts());
+    	for(Product a : this.productService.listProducts()){
+			logger.info(""
+					+ " List 2: "+a.getProductId()+a.getCode()+a.getSeller());
+		}
+    	for(Product a : this.productService.listProducts()){
+    		modelAndView.addObject("listProducts",a.getProductId()+""+a.getCode()+a.getSeller());
+    		//return modelAndView;
+		}
 		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
 		modelAndView.addObject("adminMessage","You can add and edit product");
 		modelAndView.setViewName("admin/home");

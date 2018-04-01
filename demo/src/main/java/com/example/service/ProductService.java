@@ -11,5 +11,5 @@ public interface ProductService {
     
     public void delete(int productID);
     
-    public List<Product> ProductsView();
+    public List<Product> listProducts();
 }
