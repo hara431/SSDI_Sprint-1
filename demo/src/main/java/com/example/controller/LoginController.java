@@ -16,6 +16,8 @@ import com.example.model.User;
 import com.example.service.ProductService;
 import com.example.service.UserService;
 
+//import antlr.collections.List;
+
 @Controller
 public class LoginController {
 	
@@ -74,29 +76,4 @@ public class LoginController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/admin/addproduct", method = RequestMethod.GET)
-	public ModelAndView addProduct() {
-		ModelAndView modelAndView = new ModelAndView();
-		Product product = new Product();
-		modelAndView.addObject("product", product);
-		modelAndView.setViewName("/admin/addproduct");
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = "/admin/addproduct", method = RequestMethod.POST)
-	public ModelAndView createNewProduct(@Valid Product product, BindingResult bindingResult) {
-		ModelAndView modelAndView = new ModelAndView();
-		System.out.println("here error *****");
-		//User userExists = userService.findUserByEmail(user.getEmail());
-		if (bindingResult.hasErrors()) {
-			modelAndView.setViewName("/admin/addproduct");
-		} else {
-			productService.addProduct(product);
-			modelAndView.addObject("successMessage", "Product has been added successfully");
-			modelAndView.addObject("product", new Product());
-			modelAndView.setViewName("/admin/addproduct");
-			
-		}
-		return modelAndView;
-	}
 }

@@ -16,7 +16,18 @@ public class Product {
 	private int productId;
 	@Column(name="productname")
 	private String productName;
-
+	@Column(name="seller")
+	private String seller;
+	@Column(name="code")
+	private String code;
+	@Column(name="price")
+	private float price;
+	public String getSeller() {
+		return seller;
+	}
+	public void setSeller(String seller) {
+		this.seller = seller;
+	}
 	public int getProductId() {
 		return productId;
 	}
@@ -41,10 +52,7 @@ public class Product {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	@Column(name="code")
-	private String code;
-	@Column(name="price")
-	private float price;
+
 	
 
 	

@@ -24,6 +24,36 @@
 					<span th:utext="${userName}"></span>
 				</div>
 				<p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
+		<div align="center">
+            <h1>Product List</h1>
+            <table border="1">
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Price</th>
+                <th>Seller</th>
+                <th>Action</th>
+                 
+                <c:forEach var="productout" items="${listProducts}" varStatus="status">
+                <tr>
+                    <td>${productout.productId}</td>
+                    <td>${productout.productName}</td>
+                    <td>${productout.code}</td>
+                    <td>${productout.price}</td>
+                    <td>${productout.seller}</td>
+                    <td>
+                         <form th:action="@{/admin/editproduct}" method="get">
+							<button class="btn btn-md" name="edit PRODUCT"
+							type="Submit">edit Product</button>
+						</form>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/admin/deleteproduct?id=${productout.id}">Delete</a>
+                    </td>
+                             
+                </tr>
+                </c:forEach>             
+            </table>
+        </div>
 				
  		<form th:action="@{/admin/addproduct}" method="get">
 		<button class="btn btn-md btn-danger btn-block" name="ADD PRODUCT"
