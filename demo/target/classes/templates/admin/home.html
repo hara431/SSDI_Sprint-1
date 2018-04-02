@@ -27,37 +27,25 @@
 		<div align="center">
             <h1>Product List</h1>
             <table border="1">
-                <th>Product ID</th>
-                <th>Name</th>
-                <th>Code</th>
-                <th>Price</th>
-                <th>Seller</th>
-                <th>Action</th>
-                <c:forEach items="${listProducts}" var="productout" varStatus="status">
-                <tr>
-                <span th:utext="${listProducts}"></span>
-                <c:out value = "${productout.productId}"/><p>
-                <c:out value = "${productout.productName}"/><p>
-                <c:out value = "${productout.code}"/><p>
-                <c:out value = "${productout.price}"/><p>
-                
-                
-<!--                     <td>${productout.productId}</td>
-                    <td>${productout.productName}</td>
-                    <td>${productout.code}</td>
-                    <td>${productout.price}</td>
-                    <td>${productout.seller}</td> 
-                         <form th:action="@{/admin/editproduct}" method="get">
-							<button class="btn btn-md" name="edit PRODUCT"
-							type="Submit">edit Product</button>
-						</form>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="/admin/deleteproduct?id=${productout.id}">Delete</a>
-                    </td>
-                           -->  
-                </tr>
-                </c:forEach>             
-            </table>
+<tr>
+<th>Product ID</th>
+<th>Name</th>
+<th>Code</th>
+<th>Price</th>
+<th>Seller</th>
+<th>Action</th>
+</tr>
+<tr th:each="product : ${listProducts}">
+<td th:text="${product.productId}">productId</td>
+<td th:text="${product.productName}">productName</td>
+<td th:text="${product.code}">code</td>
+<td th:text="${product.price}">price</td>
+<td th:text="${product.seller}">seller</td>
+<td ><a th:href="@{'/edit?productId=' + ${product.productId}}">Edit</a>
+<a th:href="@{'/delete?productId=' + ${product.productId}}">Delete</a>
+</td>
+</tr>
+</table>
         </div>
 				
  		<form th:action="@{/admin/addproduct}" method="get">
