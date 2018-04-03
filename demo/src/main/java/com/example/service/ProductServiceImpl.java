@@ -40,7 +40,12 @@ public class ProductServiceImpl implements ProductService{
 		productRepository.save(product);
 		
 	}
-	public void saveOrUpdate(Product product){		
+	@Override
+	@Transactional
+	public void saveOrUpdate(int productId){	
+		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+		 session.createQuery("UPDATE FROM Product p WHERE product_id=" + productId).executeUpdate();
+		
 	}
 	@Override
 	@Transactional

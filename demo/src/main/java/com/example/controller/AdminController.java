@@ -43,20 +43,20 @@ public class AdminController {
 		return modelAndView;
 	}
 	
-/*	@RequestMapping(value="/admin/editproduct", method = RequestMethod.GET)
-	public ModelAndView editProduct() {
-		ModelAndView modelAndView = new ModelAndView();
-		Product product = new Product();
-		modelAndView.addObject("product", product);
-		modelAndView.setViewName("/admin/addproduct");
-		return modelAndView;
-	}*/
+	@RequestMapping(value="/admin/editproduct", method = RequestMethod.GET)
+	public ModelAndView editProduct(HttpServletRequest request) {
+	    int productId = Integer.parseInt(request.getParameter("productId"));
+	    productService.saveOrUpdate(productId);
+	    ModelAndView model = new ModelAndView("addproduct");
+	  //  model.addObject("product", product);
+	 
+	    return model;
+	}
+	
 	@RequestMapping(value="/admin/deleteproduct", method = RequestMethod.GET)
 	public ModelAndView deleteProduct(HttpServletRequest request) {
 	    int productId = Integer.parseInt(request.getParameter("productId"));
-	   // System.out.println("productid id is "+productId);
 	    productService.delete(productId);
-	    //***NEED TO BE MODIFIED***********
-	    return new ModelAndView("redirect:/home.html");
-	}
+	    return new ModelAndView("redirect:/admin/home");
+	    }
 }
