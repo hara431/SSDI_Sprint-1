@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Product List</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+<h1>Product List</h1>
+<table border="1">
+
+<tr th:each="product : ${listProducts}">
+<div class="product-preview-container">
+           <ul>
+<li><img class="product-image"
+                   src="${pageContext.request.contextPath}/productImage?code=${prodInfo.code}" /></li>
+<li>Code: ${product.code}</li>
+<li>Name: ${product.productName}</li>
+<li>Price: <fmt:formatNumber value="${prodInfo.price}" type="currency"/></li>
+<li><a
+                   href="${pageContext.request.contextPath}/buyProduct?code=${prodInfo.code}">
+                       Buy Now</a></li>		   
+ </ul>
+</div>
+		
+</div>
+</body>
+</html>
