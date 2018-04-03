@@ -42,25 +42,19 @@ public class ProductServiceImpl implements ProductService{
 	}
 	public void saveOrUpdate(Product product){		
 	}
+	@Override
+	@Transactional
     public void delete(int productId) {
+    	Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
+    	session.createQuery("DELETE FROM Product p WHERE product_id=" + productId).executeUpdate();
         
     }
 	@Override
 	@Transactional
     public List<Product> listProducts() {
-    	//return (List<Product>)productRepository.findAll();
-    	//Session session = this.sessionFactory.getCurrentSession();
 		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
     	List<Product> productList = session.createQuery("select p from Product p").list();
-    	for(Product a : productList){
-			logger.info(""
-					+ " List: "+a.getProductId()+a.getCode()+a.getSeller());
-		}
 		return productList;
     }
 	
-
-/*    public List<Product> listProducts(){
-		return entityManger.createQuery("select p from Product p", Product.class).getResultList();
-    }*/
 }

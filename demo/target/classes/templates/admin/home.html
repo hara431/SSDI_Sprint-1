@@ -41,8 +41,8 @@
 <td th:text="${product.code}">code</td>
 <td th:text="${product.price}">price</td>
 <td th:text="${product.seller}">seller</td>
-<td ><a th:href="@{'/edit?productId=' + ${product.productId}}">Edit</a>
-<a th:href="@{'/delete?productId=' + ${product.productId}}">Delete</a>
+<td ><a th:href="@{'/admin/editproduct?productId=' + ${product.productId}}">Edit</a>
+<a th:href="@{'/admin/deleteproduct?productId=' + ${product.productId}}">Delete</a>
 </td>
 </tr>
 </table>

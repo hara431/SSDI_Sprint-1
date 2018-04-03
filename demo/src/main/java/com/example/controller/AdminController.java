@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,20 +43,20 @@ public class AdminController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value="/admin/editproduct", method = RequestMethod.GET)
+/*	@RequestMapping(value="/admin/editproduct", method = RequestMethod.GET)
 	public ModelAndView editProduct() {
 		ModelAndView modelAndView = new ModelAndView();
 		Product product = new Product();
 		modelAndView.addObject("product", product);
 		modelAndView.setViewName("/admin/addproduct");
 		return modelAndView;
-	}
-/*	@RequestMapping(value="/admin/deleteproduct", method = RequestMethod.GET)
-	public ModelAndView deleteProduct() {
-		   int productId = Integer.parseInt(request.getParameter("id"));
-		    contactDAO.delete(contactId);
-		    return new ModelAndView("redirect:/");
-		modelAndView.setViewName("/admin/addproduct");
-		return modelAndView;
 	}*/
+	@RequestMapping(value="/admin/deleteproduct", method = RequestMethod.GET)
+	public ModelAndView deleteProduct(HttpServletRequest request) {
+	    int productId = Integer.parseInt(request.getParameter("productId"));
+	   // System.out.println("productid id is "+productId);
+	    productService.delete(productId);
+	    //***NEED TO BE MODIFIED***********
+	    return new ModelAndView("redirect:/home.html");
+	}
 }
