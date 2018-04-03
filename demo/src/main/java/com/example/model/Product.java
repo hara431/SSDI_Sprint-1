@@ -20,7 +20,15 @@ public class Product {
 	private String seller;
 	@Column(name="code")
 	private String code;
+	@Column(name="description")
+	private String desc;
 	
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 	@Column(name="price")
 	private float price;
 	public String getSeller() {
