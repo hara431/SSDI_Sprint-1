@@ -16,33 +16,36 @@
 					role="form">
 
 		<h2>Product Details</h2>
-					
+				<input type="hidden" th:field="*{productId}" placeholder="Product ID"
+								class="form-control">	
 				<div class="form-group">
 							<div class="col-sm-9">
-							<input type="text" th:field="*{productName}" placeholder="Product name"
+							PRODUCT NAME:<input type="text" th:field="*{productName}" placeholder="Product name"
 								class="form-control" /> <label></label>
 						</div>
 		 
 					</div>
 					<div class="form-group">
 						<div class="col-sm-9">
-							<input type="text" th:field="*{code}"
+							PRODUCT CODE:<input type="text" th:field="*{code}"
 								placeholder="Product Code" class="form-control" /> 
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-9">
-							<input type="text" th:field="*{price}" placeholder="Product Price"
+							PRODUCT PRICE:<input type="text" th:field="*{price}" placeholder="Product Price"
 								class="form-control" /> 
 						</div>
 					</div>
+					
+					
 					<div class="form-group">
 						<div class="col-sm-9">
-							<input type="text" th:field="*{seller}" placeholder="Product Seller"
+							PRODUCT SELLER:<input type="text" th:field="*{seller}" placeholder="Product Seller"
 								class="form-control" /> 
 						</div>
 					</div>
-
+					
 
 					<div class="form-group">
 						<div class="col-sm-9">

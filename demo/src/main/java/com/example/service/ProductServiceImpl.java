@@ -13,12 +13,19 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.model.Product;
 import com.example.repository.ProductRepository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
+import javax.sql.DataSource;
 
 @Service("productService")
 public class ProductServiceImpl implements ProductService{
@@ -27,9 +34,13 @@ public class ProductServiceImpl implements ProductService{
 	private ProductRepository productRepository;
 	@Autowired
 	private SessionFactory sessionFactory;
-	/*
-	@PersistenceContext
-    private EntityManager entityManger;*/	
+	
+
+    private JdbcTemplate jdbcTemplate;
+ 
+    public ProductServiceImpl(DataSource dataSource) {
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 	
 	  @Autowired
 	  private EntityManagerFactory entityManagerFactory;
@@ -40,12 +51,24 @@ public class ProductServiceImpl implements ProductService{
 		productRepository.save(product);
 		
 	}
+
 	@Override
 	@Transactional
-	public void saveOrUpdate(int productId){	
-		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
-		 session.createQuery("UPDATE FROM Product p WHERE product_id=" + productId).executeUpdate();
-		
+	public void saveOrUpdate(Product product){	
+		if (product.getProductId() > 0) {
+	        // update
+	        String sql = "UPDATE product SET productname=?, code=?, price=?, "
+	                    + "seller=? WHERE product_id=?";
+	        jdbcTemplate.update(sql, product.getProductName(), product.getCode(),
+	        		product.getPrice(), product.getSeller(), product.getProductId());
+	    } else {
+	        // insert
+	        String sql = "INSERT INTO product (productname, code, price, seller)"
+	                    + " VALUES (?, ?, ?, ?)";
+	        jdbcTemplate.update(sql,product.getProductName(), product.getCode(),
+	        		product.getPrice(), product.getSeller(), product.getProductId());
+	    }
+	 	
 	}
 	@Override
 	@Transactional
@@ -60,6 +83,31 @@ public class ProductServiceImpl implements ProductService{
 		Session session = entityManagerFactory.unwrap(SessionFactory.class).openSession();
     	List<Product> productList = session.createQuery("select p from Product p").list();
 		return productList;
+    }
+	@Override
+	@Transactional
+    public Product getProduct(int productId) {
+		String sql = "SELECT * FROM Product WHERE product_id=" + productId;
+		System.out.println("sql query is"+sql);
+	    return jdbcTemplate.query(sql, new ResultSetExtractor<Product>() {
+	 
+	        @Override
+	        public Product extractData(ResultSet rs) throws SQLException,
+	                DataAccessException {
+	            if (rs.next()) {
+	                Product product = new Product();
+	                product.setProductId(rs.getInt("product_id"));
+	                product.setProductName(rs.getString("productname"));
+	                product.setCode(rs.getString("code"));
+	                product.setPrice(rs.getInt("price"));
+	                product.setSeller(rs.getString("seller"));
+	                return product;
+	            }
+	 
+	            return null;
+	        }
+	 
+	    });
     }
 	
 }

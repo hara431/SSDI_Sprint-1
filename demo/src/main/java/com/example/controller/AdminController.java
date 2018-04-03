@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -46,11 +47,17 @@ public class AdminController {
 	@RequestMapping(value="/admin/editproduct", method = RequestMethod.GET)
 	public ModelAndView editProduct(HttpServletRequest request) {
 	    int productId = Integer.parseInt(request.getParameter("productId"));
-	    productService.saveOrUpdate(productId);
-	    ModelAndView model = new ModelAndView("addproduct");
-	  //  model.addObject("product", product);
-	 
-	    return model;
+	     Product product= productService.getProduct(productId);
+	     ModelAndView model = new ModelAndView("/admin/addproduct");
+	     model.addObject("product", product);
+	   //  model.addObject("product", "Welcome " + product.getSeller()); 
+	     return model;
+	    
+	}
+	@RequestMapping(value = "/saveContact", method = RequestMethod.POST)
+	public ModelAndView saveContact(@ModelAttribute Product product) {
+		productService.saveOrUpdate(product);
+	    return new ModelAndView("redirect:/");
 	}
 	
 	@RequestMapping(value="/admin/deleteproduct", method = RequestMethod.GET)

@@ -20,6 +20,7 @@ public class Product {
 	private String seller;
 	@Column(name="code")
 	private String code;
+	
 	@Column(name="price")
 	private float price;
 	public String getSeller() {
