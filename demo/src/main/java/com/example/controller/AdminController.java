@@ -54,8 +54,8 @@ public class AdminController {
 	     return model;
 	    
 	}
-	@RequestMapping(value = "/saveContact", method = RequestMethod.POST)
-	public ModelAndView saveContact(@ModelAttribute Product product) {
+	@RequestMapping(value = "/saveProduct", method = RequestMethod.POST)
+	public ModelAndView saveProduct(@ModelAttribute Product product) {
 		productService.saveOrUpdate(product);
 	    return new ModelAndView("redirect:/");
 	}

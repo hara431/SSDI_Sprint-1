@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 @Entity
 @Table(name = "product")
 public class Product {
@@ -22,7 +24,16 @@ public class Product {
 	private String code;
 	@Column(name="description")
 	private String desc;
+	@Column(name="image")
+	 private CommonsMultipartFile fileData;
 	
+	 public CommonsMultipartFile getFileData() {
+	        return fileData;
+	    }
+	 
+	    public void setFileData(CommonsMultipartFile fileData) {
+	        this.fileData = fileData;
+	    }
 	public String getDesc() {
 		return desc;
 	}

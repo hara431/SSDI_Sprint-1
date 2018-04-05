@@ -30,16 +30,18 @@ public class LoginController {
 	private ProductService productService;
 	
 
-	@RequestMapping(value={"/login"}, method = RequestMethod.GET)
+	@RequestMapping(value={"/","/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
-	@RequestMapping(value={"/user/userproducts"}, method = RequestMethod.GET)
-	public ModelAndView productsview(){
+	@RequestMapping(value="/userpages/userview", method = RequestMethod.GET)
+	public ModelAndView userproducts(){
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/userproducts");
+/*		Product product = new Product();
+		modelAndView.addObject("product", product);*/
+		modelAndView.setViewName("userpages/userview");
 		return modelAndView;
 	}
 	
