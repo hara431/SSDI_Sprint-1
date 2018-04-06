@@ -36,14 +36,7 @@ public class LoginController {
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
-	@RequestMapping(value="/userpages/userview", method = RequestMethod.GET)
-	public ModelAndView userproducts(){
-		ModelAndView modelAndView = new ModelAndView();
-/*		Product product = new Product();
-		modelAndView.addObject("product", product);*/
-		modelAndView.setViewName("userpages/userview");
-		return modelAndView;
-	}
+
 	
 	@RequestMapping(value="/registration", method = RequestMethod.GET)
 	public ModelAndView registration(){
