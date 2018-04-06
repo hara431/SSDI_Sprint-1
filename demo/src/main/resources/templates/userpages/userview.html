@@ -3,31 +3,33 @@
 	xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Spring Security Tutorial</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<title>Starter Zone</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 </head>
 <body>
-            <h1>Product List</h1>
-
+<header ng-include="'includes/header.html'">                    
+</header>
+<h1>Product List</h1>
 
 <div th:each="product : ${listProducts}">
-           <ul>
-           <li>${product.code}</li>
-        <!--        <li><img class="product-image"
-                   src="${pageContext.request.contextPath}/productImage?code=${prodInfo.code}" /></li> -->
-                   <li th:each="product : *{listProducts}" th:text="${product.code}">Item description here...</li>
-               <li>${product.code}</li>
-               <li>Name: ${prodInfo.name}</li>
-               <li>Price: <fmt:formatNumber value="${prodInfo.price}" type="currency"/></li>
-               <li><a
-                   href="${pageContext.request.contextPath}/buyProduct?code=${prodInfo.code}">
-                       Buy Now</a></li>
-           </ul>
-       </div>
+<div class="product-preview-container">
+<ul>
+<li><img class="product-image"
+src="${pageContext.request.contextPath}/productImage?code=${prodInfo.code}" /></li>
+                   
+<li th:text="${product.productName}">${product.productName}</li>
+<li th:text="${product.code}">${product.code}</li>
+<li th:text="${product.price}">${product.code}</li>
+<li th:text="${product.seller}">${product.code}</li>
+<li th:text="${product.desc}">${product.desc}</li>
+<li><a href="${pageContext.request.contextPath}/buyProduct?code=${prodInfo.code}">Buy Now</a></li>
+</ul>
+</div>
        
-       
+</div>      
 </body>
 </html>
