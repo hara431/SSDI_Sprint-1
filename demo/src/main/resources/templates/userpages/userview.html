@@ -11,47 +11,20 @@
 </head>
 <body>
             <h1>Product List</h1>
-            <table border="1">
-<tr>
-<th>Product ID</th>
-<th>Name</th>
-<th>Code</th>
-<th>Price</th>
-<th>Seller</th>
-<th>Action</th>
-</tr>
-<tr th:each="product : ${listProducts}">
-<td th:text="${product.productId}">productId</td>
-<td th:text="${product.productName}">productName</td>
-<td th:text="${product.code}">code</td>
-<td th:text="${product.price}">price</td>
-<td th:text="${product.seller}">seller</td>
-<td ><a th:href="@{'/admin/editproduct?productId=' + ${product.productId}}">Edit</a>
-<a th:href="@{'/admin/deleteproduct?productId=' + ${product.productId}}">Delete</a>
-</td>
-</tr>
-</table>
 
 
-<tr th:each="product : ${listProducts}">
-<div class="product-preview-container">
+<div th:each="product : ${listProducts}">
            <ul>
+           <li>${product.code}</li>
         <!--        <li><img class="product-image"
                    src="${pageContext.request.contextPath}/productImage?code=${prodInfo.code}" /></li> -->
                    <li th:each="product : *{listProducts}" th:text="${product.code}">Item description here...</li>
-                   <li th:text="${product.code}">Item description here...</li>
-               <li>Code:${product.code}</li>
+               <li>${product.code}</li>
                <li>Name: ${prodInfo.name}</li>
                <li>Price: <fmt:formatNumber value="${prodInfo.price}" type="currency"/></li>
                <li><a
                    href="${pageContext.request.contextPath}/buyProduct?code=${prodInfo.code}">
                        Buy Now</a></li>
-               <!-- For Manager edit Product -->
-               <security:authorize  access="hasRole('ROLE_MANAGER')">
-                 <li><a style="color:red;"
-                     href="${pageContext.request.contextPath}/product?code=${prodInfo.code}">
-                       Edit Product</a></li>
-               </security:authorize>
            </ul>
        </div>
        
