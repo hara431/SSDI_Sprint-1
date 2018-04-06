@@ -75,6 +75,8 @@ CREATE TABLE `product` (
   `code` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
   `seller` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `image` longblob ,
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
