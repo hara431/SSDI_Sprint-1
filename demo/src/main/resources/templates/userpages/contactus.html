@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-
+<html>
 <head>
 	<title>Starter Zone</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
@@ -11,7 +9,6 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
 </head>
-
 <style>
 .page-heading {
 
@@ -75,26 +72,48 @@ ul {
         <a th:href="@{'/userpages/contactus'}">Contact</a>
         
     </nav>
-   
-<h1>Product List</h1>
-
-<div th:each="product : ${listProducts}">
-<div class="product-preview-container">
-<ul>
-<li><img class="product-image"
-src="${pageContext.request.contextPath}/productImage?code=${prodInfo.code}" /></li>
-                   
-<li th:text="${product.productName}">${product.productName}</li>
-<li th:text="${product.code}">${product.code}</li>
-<li th:text="${product.price}">${product.code}</li>
-<li th:text="${product.seller}">${product.code}</li>
-<li th:text="${product.desc}">${product.desc}</li>
-
-<!--  Needs to be modified  -->
-<li><a href="${pageContext.request.contextPath}/buyProduct?code=${prodInfo.code}">Buy Now</a></li>
-</ul>
-</div>
-  </div>      
-</div>      
+<div id="form">
+          
+          <form method="post" action="process.php">
+              
+              <p>
+              <label for="name">Name:</label>
+              <input type="text" name="name" placeholder="Your Name" required>
+              
+              </p>
+              
+              <p>
+              <label for="name">Email:</label>
+              <input type="text" name="email" required>
+              
+              </p>
+              
+              <label for="name">Subject:</label>
+              <input type="text" name="subject" required>
+              
+              
+                  
+            <p> 
+            <label for="message"></label>
+            <textarea id="message" name="body" id="" cols="30" rows="10" required></textarea>
+              </p> 
+              
+              <p>
+                  <input id="submit" type="submit" name="submit" value="Send Message">
+              </p>
+              
+              
+              
+              
+          </form>
+           
+           
+           
+           
+           
+           
+           
+        </div>    
+       </div>
 </body>
 </html>
