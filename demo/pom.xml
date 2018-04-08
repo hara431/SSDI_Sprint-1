@@ -46,7 +46,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+<dependency>
+  <groupId>com.google.firebase</groupId>
+  <artifactId>firebase-server-sdk</artifactId>
+  <version>[3.0.0,)</version>
+</dependency>
  <!-- https://mvnrepository.com/artifact/org.jmockit/jmockit -->
 <dependency>
     <groupId>org.jmockit</groupId>

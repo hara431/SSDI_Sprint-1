@@ -24,16 +24,16 @@ public class Product {
 	private String code;
 	@Column(name="description")
 	private String desc;
-	@Column(name="image")
-	 private CommonsMultipartFile fileData;
-	
-	 public CommonsMultipartFile getFileData() {
-	        return fileData;
-	    }
-	 
-	    public void setFileData(CommonsMultipartFile fileData) {
-	        this.fileData = fileData;
-	    }
+	public Product() {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.seller = seller;
+		this.code = code;
+		this.desc = desc;
+		this.price = price;
+	}
+
 	public String getDesc() {
 		return desc;
 	}

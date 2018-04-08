@@ -58,15 +58,15 @@ public class ProductServiceImpl implements ProductService{
 		if (product.getProductId() > 0) {
 	        // update
 	        String sql = "UPDATE product SET productname=?, code=?, price=?, "
-	                    + "seller=?,description=?,image=? WHERE product_id=?";
+	                    + "seller=?,description=? WHERE product_id=?";
 	        jdbcTemplate.update(sql, product.getProductName(), product.getCode(),
-	        		product.getPrice(), product.getSeller(),product.getDesc(),product.getFileData(), product.getProductId());
+	        		product.getPrice(), product.getSeller(),product.getDesc(), product.getProductId());
 	    } else {
 	        // insert
-	        String sql = "INSERT INTO product (productname, code, price, seller,description,image)"
+	        String sql = "INSERT INTO product (productname, code, price, seller,description)"
 	                    + " VALUES (?, ?, ?, ?,?,?)";
 	        jdbcTemplate.update(sql,product.getProductName(), product.getCode(),
-	        		product.getPrice(), product.getSeller(),product.getDesc(),product.getFileData(), product.getProductId());
+	        		product.getPrice(), product.getSeller(),product.getDesc(), product.getProductId());
 	    }
 	 	
 	}
