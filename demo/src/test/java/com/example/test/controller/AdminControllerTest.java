@@ -13,30 +13,60 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import com.example.controller.AdminController;
+import com.example.model.User;
 import com.example.service.ProductService;
+import com.example.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import mockit.Expectations;
+import mockit.Injectable;
+import mockit.Tested;
+import mockit.integration.junit4.JMockit;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static
+org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+@RunWith(JMockit.class)
+@SpringBootTest
 public class AdminControllerTest {
 
-	@InjectMocks
+	@Tested
 	private AdminController adminController;
 	
-	@Mock
-	ProductService available_apartmentService;
+	@Injectable
+	ProductService productService;
+	
+	@Injectable
+	 UserService userService;
+	private MockMvc mock_mvc;
+	private ObjectMapper obj_mapper;
 	
 	@Before
-	public void setUp() throws Exception {
-		MockitoAnnotations.initMocks(this);
+	public void init() {
+	obj_mapper = new ObjectMapper();
+	mock_mvc = MockMvcBuilders.standaloneSetup(adminController).build
+	();
 	}
 	@Test
-	public void testGetListApartments() {
+	public void testadminHome() {
 		
-		Model model;
-		model=mock(Model.class);
-
+		
+		 try {
+			  mock_mvc.perform(get("/registration")
+			 .contentType(MediaType.APPLICATION_JSON)
+			 .content(obj_mapper.writeValueAsString(productService)))
+			  .andExpect(status().isOk());
+			  } catch (Exception e) {
+			  e.printStackTrace();
+			  }
 	}
 }
