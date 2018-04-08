@@ -24,16 +24,9 @@ public class Product {
 	private String code;
 	@Column(name="description")
 	private String desc;
-	public Product() {
-		super();
-		this.productId = productId;
-		this.productName = productName;
-		this.seller = seller;
-		this.code = code;
-		this.desc = desc;
-		this.price = price;
-	}
+	public Product(){}
 
+	
 	public String getDesc() {
 		return desc;
 	}
