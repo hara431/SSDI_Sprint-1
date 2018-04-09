@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -19,9 +20,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
+import mockit.*;
 
 import com.example.controller.AdminController;
+import com.example.controller.LoginController;
 import com.example.model.User;
+import com.example.repository.UserRepository;
 import com.example.service.ProductService;
 import com.example.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,40 +41,60 @@ org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @RunWith(JMockit.class)
 @SpringBootTest
-public class AdminControllerTest {
+public class LoginControllerTest {
 
-	@Tested
-	private AdminController admin_Controller;
+//	@Tested(availableDuringSetup=true)
+	private LoginController login_Controller;
 	
 	@Injectable
 	ProductService productService;
 	
 	@Injectable
+	static
 	 UserService userService;
-	
+	private static UserRepository userRepository;
 	private MockMvc mock_mvc;
 	private ObjectMapper obj_mapper;
 	
 	@Before
 	public void init() {
 	obj_mapper = new ObjectMapper();
-	mock_mvc = MockMvcBuilders.standaloneSetup(admin_Controller).build
+	mock_mvc = MockMvcBuilders.standaloneSetup(login_Controller).build
 	();
 	}
-	/*@Test
+
+	private static User u1;
+	
+	@BeforeClass
+	public static void setUp(){
+		u1 = mock(User.class);
+		u1=new User();
+		u1.setId(9);
+		u1.setPassword("12345");
+		u1.setName("harika");
+		u1.setLastName("ka");
+		u1.setEmail("h@gmail.com");
+		u1.setActive(1);
+		//u1.setRoles("");
+		userRepository=mock(UserRepository.class);
+		userService=mock(UserService.class);
+	}
+	@Test
 	public void testadminHome() {
-		admin_Controller.registration();
+		
+		
+		login_Controller.registration();
 		
 		new Expectations() {{
-			userService.saveUser(test_building);
+			userService.saveUser(u1);
 		 }};
 		 try {
-			  mock_mvc.perform(get("/registration")
+			  mock_mvc.perform(post("/registration")
 			 .contentType(MediaType.APPLICATION_JSON)
-			 .content(obj_mapper.writeValueAsString(productService)))
+			 .content(obj_mapper.writeValueAsString(u1)))
 			  .andExpect(status().isOk());
 			  } catch (Exception e) {
 			  e.printStackTrace();
 			  }
 	}
-*/}
+}

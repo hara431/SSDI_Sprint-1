@@ -79,6 +79,8 @@ ul {
 <h1>Product List</h1>
 
 <div th:each="product : ${listProducts}">
+ <div class="row">
+    <div class="col-md-4">
 <div class="product-preview-container">
 <ul>
 <li><img class="product-image"
@@ -91,8 +93,11 @@ src="${pageContext.request.contextPath}/productImage?code=${prodInfo.code}" /></
 <li th:text="${product.desc}">${product.desc}</li>
 
 <!--  Needs to be modified  -->
-<li><a href="${pageContext.request.contextPath}/buyProduct?code=${prodInfo.code}">Buy Now</a></li>
+<li><a th:href="@{'/userpages/buyProduct?productId=' + ${product.productId}}">Buy Now</a></li>
+
 </ul>
+</div>
+</div>
 </div>
   </div>      
 </div>      

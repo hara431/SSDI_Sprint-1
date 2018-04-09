@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.DemoApplicationTests" time="1.993" tests="1" errors="0" skipped="0" failures="0">
+<testsuite name="com.example.test.service.ProductServiceImplTest" time="0.028" tests="2" errors="1" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\jdk1.8.0_131\jre\bin"/>
@@ -60,5 +60,10 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="contextLoads" classname="com.example.DemoApplicationTests" time="1.993"/>
+  <testcase name="testaddproduct" classname="com.example.test.service.ProductServiceImplTest" time="0.025"/>
+  <testcase name="testsaveOrUpdate" classname="com.example.test.service.ProductServiceImplTest" time="0.003">
+    <error type="java.lang.NullPointerException:">java.lang.NullPointerException: null
+	at com.example.test.service.ProductServiceImplTest.testsaveOrUpdate(ProductServiceImplTest.java:63)
+</error>
+  </testcase>
 </testsuite>

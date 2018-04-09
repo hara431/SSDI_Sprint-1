@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -30,11 +32,14 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/admin/addproduct", method = RequestMethod.POST)
-	public ModelAndView createNewProduct(@Valid Product product, BindingResult bindingResult) {
+	public ModelAndView createNewProduct(@Valid Product product, BindingResult bindingResult, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("/admin/addproduct");
 		} else {
+//			product.setImage(request.getParameter("imgURL"));
+			product.setImage(request.getParameter("imgURL"));
+			System.out.println("Image is "+product.getImage());
 			productService.addProduct(product);
 			modelAndView.addObject("successMessage", "Product has been added successfully");
 			modelAndView.addObject("product", new Product());
