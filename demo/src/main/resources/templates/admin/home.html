@@ -33,6 +33,7 @@
 <th>Code</th>
 <th>Price</th>
 <th>Seller</th>
+<th>Image</th>
 <th>Action</th>
 </tr>
 <tr th:each="product : ${listProducts}">
@@ -43,10 +44,11 @@
 <td th:text="${product.seller}">seller</td>
 <td> <img th:src="${product.image}"></td>
 <td ><a th:href="@{'/admin/editproduct?productId=' + ${product.productId}}">Edit</a>
+<span>|</span>	
 <a th:href="@{'/admin/deleteproduct?productId=' + ${product.productId}}">Delete</a>
 </td>
 </tr>
-</table>
+</table><br><br>	
         </div>
 				
  		<form th:action="@{/admin/addproduct}" method="get">
